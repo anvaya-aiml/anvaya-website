@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Images, Loader2 } from 'lucide-react';
+import { Image, Loader2 } from 'lucide-react';
 import { publicApi } from '@/services/publicApi';
 import { WingWithRelations } from '@/types/wing';
 import ImageSlideshow from '@/components/ImageSlideshow';
@@ -60,31 +60,39 @@ const WingPage: React.FC = () => {
   const slideshowPhotos = wing.photos.slice(0, 10);
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-white">
       {/* Hero with Slideshow */}
-      <section className="bg-white py-8 sm:py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-gradient-to-br from-primary-600 via-primary-500 to-accent-500 py-12 sm:py-16 text-white relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-10 right-10 w-64 h-64 bg-accent-400 rounded-full filter blur-3xl opacity-50"></div>
+          <div className="absolute bottom-10 left-10 w-80 h-80 bg-primary-400 rounded-full filter blur-3xl opacity-50"></div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
-            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8 text-center">
+            <h1 className="text-4xl sm:text-5xl font-bold mb-8 text-center drop-shadow-lg">
               {wing.name}
             </h1>
             
-            {slideshowPhotos.length > 0 ? (
-              <ImageSlideshow photos={slideshowPhotos} />
-            ) : (
-              <div className="aspect-video bg-gradient-to-br from-primary-100 to-accent-100 rounded-lg flex items-center justify-center">
-                <p className="text-gray-600">No photos available</p>
-              </div>
-            )}
+            <div className="bg-white/10 backdrop-blur-sm rounded-xl p-2 sm:p-4 shadow-2xl border border-white/20">
+              {slideshowPhotos.length > 0 ? (
+                <ImageSlideshow photos={slideshowPhotos} />
+              ) : (
+                <div className="aspect-video bg-gradient-to-br from-primary-800 to-primary-600 rounded-lg flex items-center justify-center border border-white/10">
+                  <p className="text-white font-medium">No photos available</p>
+                </div>
+              )}
+            </div>
 
             {wing.photos.length > 0 && (
-              <div className="mt-6 text-center">
+              <div className="mt-8 text-center">
                 <Link to={getWingGalleryRoute(slug!)}>
-                  <Button variant="outline" className="inline-flex items-center">
-                    <Images size={20} className="mr-2" />
+                  <Button variant="outline" className="inline-flex items-center text-white border-white hover:bg-white/20 hover:text-white backdrop-blur-sm transition-all duration-300">
+                    <Image size={20} className="mr-2" />
                     View Full Gallery ({wing.photos.length} photos)
                   </Button>
                 </Link>
@@ -95,24 +103,24 @@ const WingPage: React.FC = () => {
       </section>
 
       {/* About, Vision, Mission */}
-      <section className="py-12">
+      <section className="py-16 bg-gradient-to-b from-primary-50 to-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-6">
-            <Card>
-              <h3 className="text-xl font-semibold mb-3 text-primary-600">About</h3>
-              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+            <Card className="h-full border-t-4 border-primary-500 shadow-soft hover:shadow-glow transition-all duration-300">
+              <h3 className="text-xl font-bold mb-3 text-primary-600">About</h3>
+              <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
                 {wing.about}
               </p>
             </Card>
-            <Card>
-              <h3 className="text-xl font-semibold mb-3 text-primary-600">Vision</h3>
-              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+            <Card className="h-full border-t-4 border-accent-500 shadow-soft hover:shadow-glow transition-all duration-300">
+              <h3 className="text-xl font-bold mb-3 text-accent-600">Vision</h3>
+              <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
                 {wing.vision}
               </p>
             </Card>
-            <Card>
-              <h3 className="text-xl font-semibold mb-3 text-primary-600">Mission</h3>
-              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+            <Card className="h-full border-t-4 border-primary-500 shadow-soft hover:shadow-glow transition-all duration-300">
+              <h3 className="text-xl font-bold mb-3 text-primary-600">Mission</h3>
+              <p className="text-gray-800 leading-relaxed whitespace-pre-wrap">
                 {wing.mission}
               </p>
             </Card>
@@ -121,19 +129,19 @@ const WingPage: React.FC = () => {
       </section>
 
       {/* Activities Feed */}
-      <section className="py-12 bg-white">
+      <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">Activities & Events</h2>
+          <h2 className="text-3xl font-bold text-primary-900 mb-8 border-l-4 border-accent-500 pl-4">Activities & Events</h2>
           
           {wing.activities.length > 0 ? (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {wing.activities.map((activity) => (
                 <ActivityCard key={activity.id} activity={activity} />
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 bg-gray-50 rounded-lg">
-              <p className="text-gray-600">No activities available yet.</p>
+            <div className="text-center py-16 bg-primary-50 rounded-2xl border border-primary-100">
+              <p className="text-primary-700 font-semibold">No activities available yet.</p>
             </div>
           )}
         </div>

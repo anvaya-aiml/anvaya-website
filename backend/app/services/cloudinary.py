@@ -77,12 +77,18 @@ async def upload_pdf(file: UploadFile, folder: str = "anvaya/reports") -> Dict[s
         # Read file contents
         contents = await file.read()
         
-        # Upload to Cloudinary as raw/PDF
+        # Upload to Cloudinary as image resource type (standard for viewable PDFs)
+        # This allows browser viewing and thumbnail generation
+        filename = file.filename
+        public_id = filename.rsplit('.', 1)[0] if filename and '.' in filename else None
+        
         result = cloudinary.uploader.upload(
             contents,
             folder=folder,
-            resource_type="raw",
-            format="pdf"
+            resource_type="image", # Explicitly treat as image/document
+            public_id=public_id,
+            use_filename=True,
+            unique_filename=True
         )
         
         return {

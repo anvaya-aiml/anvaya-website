@@ -8,13 +8,16 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ children, className = '', hover = false }) => {
-  const baseStyles = 'bg-white rounded-lg shadow-sm border border-gray-200 p-6';
+  const baseStyles = 'rounded-xl p-6 backdrop-blur-sm transition-all duration-300';
   
   if (hover) {
     return (
       <motion.div
-        whileHover={{ y: -4, boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.1)' }}
-        transition={{ duration: 0.2 }}
+        whileHover={{ 
+          y: -8, 
+          boxShadow: '0 20px 40px -10px rgba(93, 163, 213, 0.3)'
+        }}
+        transition={{ duration: 0.3, ease: 'easeOut' }}
         className={`${baseStyles} ${className}`}
       >
         {children}
