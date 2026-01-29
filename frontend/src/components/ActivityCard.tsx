@@ -63,7 +63,6 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
                     href={activity.report_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    download
                   >
                     <Button
                       variant="primary"
@@ -71,7 +70,7 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
                       className="inline-flex items-center"
                     >
                       <Download size={16} className="mr-2" />
-                      Download Report (PDF)
+                      View Report
                     </Button>
                   </a>
                 </div>

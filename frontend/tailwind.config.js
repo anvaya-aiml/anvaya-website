@@ -7,40 +7,62 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Anvaya Brand Colors (from logo)
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
+          50: '#e6f0f8',
+          100: '#cce1f1',
+          200: '#99c3e3',
+          300: '#66a5d5',
+          400: '#3387c7',
+          500: '#1a3a5c', // Deep Navy (logo primary)
+          600: '#152e4a',
+          700: '#102338',
+          800: '#0b1726',
+          900: '#050c13',
         },
         accent: {
-          50: '#fdf4ff',
-          100: '#fae8ff',
-          200: '#f5d0fe',
-          300: '#f0abfc',
-          400: '#e879f9',
-          500: '#d946ef',
-          600: '#c026d3',
-          700: '#a21caf',
-          800: '#86198f',
-          900: '#701a75',
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa', // Royal Blue (accent color)
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
         },
+        // Additional UI colors
+        success: '#10b981',
+        warning: '#f59e0b',
+        error: '#ef4444',
+        info: '#3b82f6',
       },
-      fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+      backgroundImage: {
+        'gradient-primary': 'linear-gradient(135deg, #1a3a5c 0%, #1d4ed8 100%)',
+        'gradient-accent': 'linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%)',
+        'gradient-hero': 'linear-gradient(135deg, #1a3a5c 0%, #2563eb 50%, #60a5fa 100%)',
+        'gradient-mesh': 'radial-gradient(at 40% 20%, #1a3a5c 0px, transparent 50%), radial-gradient(at 80% 0%, #3b82f6 0px, transparent 50%), radial-gradient(at 0% 50%, #2563eb 0px, transparent 50%)',
+      },
+      boxShadow: {
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'glow': '0 0 20px rgba(59, 130, 246, 0.3)',
+        'glow-lg': '0 0 40px rgba(59, 130, 246, 0.4)',
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
+        'float': 'float 6s ease-in-out infinite',
         'slide-up': 'slideUp 0.5s ease-out',
-        'slide-down': 'slideDown 0.3s ease-out',
+        'fade-in': 'fadeIn 0.6s ease-out',
       },
       keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
