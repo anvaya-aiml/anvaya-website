@@ -38,6 +38,7 @@ export const adminApi = {
     title: string,
     description: string,
     activityDate: string,
+    facultyCoordinator?: string,
     reportFile?: File
   ): Promise<Activity> => {
     const formData = new FormData();
@@ -45,6 +46,9 @@ export const adminApi = {
     formData.append('title', title);
     formData.append('description', description);
     formData.append('activity_date', activityDate);
+    if (facultyCoordinator) {
+      formData.append('faculty_coordinator', facultyCoordinator);
+    }
     if (reportFile) {
       formData.append('report_file', reportFile);
     }
@@ -60,12 +64,14 @@ export const adminApi = {
     title?: string,
     description?: string,
     activityDate?: string,
+    facultyCoordinator?: string,
     reportFile?: File
   ): Promise<Activity> => {
     const formData = new FormData();
     if (title) formData.append('title', title);
     if (description) formData.append('description', description);
     if (activityDate) formData.append('activity_date', activityDate);
+    if (facultyCoordinator) formData.append('faculty_coordinator', facultyCoordinator);
     if (reportFile) formData.append('report_file', reportFile);
 
     const response = await api.put<Activity>(

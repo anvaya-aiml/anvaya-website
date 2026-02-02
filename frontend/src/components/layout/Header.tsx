@@ -8,13 +8,11 @@ import iiclogo from '@/assets/iiclogo.png';
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
-
   React.useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   return (
     <header 
       className={`sticky top-0 z-30 transition-all duration-300 ease-in-out ${
@@ -35,11 +33,10 @@ const Header: React.FC = () => {
                 Dayananda Sagar College of Engineering
               </h1>
               <p className="text-xs sm:text-sm md:text-base text-primary-700 font-semibold tracking-wide uppercase group-hover:text-primary-900 transition-colors duration-300">
-                Dept. of Artificial Intelligence & Machine Learning
+                Department of Artificial Intelligence & Machine Learning
               </p>
             </Link>
           </div>
-
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex items-center gap-4">
               <img 
@@ -53,8 +50,6 @@ const Header: React.FC = () => {
                 className="h-14 w-14 object-contain drop-shadow-lg transform hover:scale-110 hover:rotate-6 transition-all duration-300" 
               />
             </div>
-            
-            {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="sm:hidden p-2 text-primary-600 hover:text-primary-700 hover:bg-primary-50 rounded-lg transition-all duration-300"
@@ -63,8 +58,6 @@ const Header: React.FC = () => {
             </button>
           </div>
         </div>
-
-        {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="sm:hidden pb-4 mt-4 animate-slide-up border-t border-gray-100 pt-4">
             <div className="flex items-center justify-center gap-8">

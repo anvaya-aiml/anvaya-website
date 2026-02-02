@@ -7,6 +7,19 @@ import { Photo } from '@/types/photo';
  * Public API functions for fetching wing, activity, and photo data
  */
 
+export interface ActivityStatistic {
+  wing_id: number;
+  wing_name: string;
+  wing_slug: string;
+  activity_count: number;
+}
+
+export interface ActivityStatisticsResponse {
+  statistics: ActivityStatistic[];
+  available_years: number[];
+  filtered_year: number | null;
+}
+
 export const publicApi = {
   // Wing endpoints
   getAllWings: async (): Promise<Wing[]> => {
@@ -35,9 +48,23 @@ export const publicApi = {
     return response.data;
   },
 
-  // Activity endpoint
+  // Activity endpoints
   getActivity: async (id: number): Promise<Activity> => {
     const response = await api.get<Activity>(`/api/activities/${id}`);
+    return response.data;
+  },
+
+  getAllActivities: async (limit: number = 1000): Promise<Activity[]> => {
+    const response = await api.get<Activity[]>('/api/activities', {
+      params: { limit },
+    });
+    return response.data;
+  },
+
+  getActivityStatistics: async (year?: number): Promise<ActivityStatisticsResponse> => {
+    const response = await api.get<ActivityStatisticsResponse>('/api/statistics/activities', {
+      params: year ? { year } : undefined,
+    });
     return response.data;
   },
 };

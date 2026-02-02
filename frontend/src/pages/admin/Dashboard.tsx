@@ -26,6 +26,7 @@ const Dashboard: React.FC = () => {
     title: '',
     description: '',
     activity_date: '',
+    faculty_coordinator: '',
   });
   const [reportFile, setReportFile] = useState<File | null>(null);
   const [submittingActivity, setSubmittingActivity] = useState(false);
@@ -113,9 +114,10 @@ const Dashboard: React.FC = () => {
         activityForm.title,
         activityForm.description,
         activityForm.activity_date,
+        activityForm.faculty_coordinator || undefined,
         reportFile || undefined
       );
-      setActivityForm({ title: '', description: '', activity_date: '' });
+      setActivityForm({ title: '', description: '', activity_date: '', faculty_coordinator: '' });
       setReportFile(null);
       setShowActivityForm(false);
       await fetchWingData();
@@ -298,6 +300,19 @@ const Dashboard: React.FC = () => {
                       onChange={(e) => setActivityForm({ ...activityForm, activity_date: e.target.value })}
                       className="w-full px-4 py-2 border border-gray-300 rounded-lg"
                       required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Faculty Coordinator
+                    </label>
+                    <input
+                      type="text"
+                      value={activityForm.faculty_coordinator}
+                      onChange={(e) => setActivityForm({ ...activityForm, faculty_coordinator: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                      placeholder="Optional"
                     />
                   </div>
 

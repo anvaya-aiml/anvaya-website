@@ -1,5 +1,8 @@
 from pydantic_settings import BaseSettings
 from functools import lru_cache
+from dotenv import load_dotenv
+load_dotenv()
+import os
 
 
 class Settings(BaseSettings):
@@ -26,7 +29,7 @@ class Settings(BaseSettings):
     cloudinary_api_secret: str
     
     # CORS
-    cors_origins: str = "https://anvaya-aiml.netlify.app,http://localhost:5173"
+    cors_origins: str = os.getenv("CORS_ORIGINS")
     
     class Config:
         env_file = ".env"
@@ -37,3 +40,5 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     """Get cached settings instance."""
     return Settings()
+
+print(get_settings().cors_origins)

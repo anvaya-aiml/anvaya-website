@@ -94,6 +94,7 @@ async def create_activity(
     title: str = Form(...),
     description: str = Form(...),
     activity_date: date = Form(...),
+    faculty_coordinator: str = Form(None),
     report_file: UploadFile = File(None),
     session: AsyncSession = Depends(get_session),
     current_admin: dict = Depends(get_current_admin)
@@ -122,6 +123,7 @@ async def create_activity(
         title=title,
         description=description,
         activity_date=activity_date,
+        faculty_coordinator=faculty_coordinator,
         report_url=report_url,
         report_cloudinary_id=report_cloudinary_id
     )
@@ -136,6 +138,7 @@ async def update_activity(
     title: str = Form(None),
     description: str = Form(None),
     activity_date: date = Form(None),
+    faculty_coordinator: str = Form(None),
     report_file: UploadFile = File(None),
     session: AsyncSession = Depends(get_session),
     current_admin: dict = Depends(get_current_admin)
@@ -157,6 +160,8 @@ async def update_activity(
         update_data["description"] = description
     if activity_date:
         update_data["activity_date"] = activity_date
+    if faculty_coordinator is not None:
+        update_data["faculty_coordinator"] = faculty_coordinator
     
     # Upload new PDF if provided
     if report_file:

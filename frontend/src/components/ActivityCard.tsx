@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, ChevronUp, Download, Calendar } from 'lucide-react';
+import { ChevronDown, ChevronUp, Download, Calendar, User } from 'lucide-react';
 import { Activity } from '@/types/activity';
 import Button from './ui/Button';
 
@@ -56,6 +56,14 @@ const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
               <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
                 {activity.description}
               </p>
+
+              {activity.faculty_coordinator && (
+                <div className="flex items-center text-sm text-gray-600 bg-primary-50 px-3 py-2 rounded-md">
+                  <User size={16} className="mr-2 text-primary-600" />
+                  <span className="font-medium text-primary-700">Faculty Coordinator: </span>
+                  <span className="ml-1">{activity.faculty_coordinator}</span>
+                </div>
+              )}
 
               {activity.report_url && (
                 <div>

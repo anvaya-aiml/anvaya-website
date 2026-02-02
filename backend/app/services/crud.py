@@ -40,6 +40,7 @@ class CRUDService:
         slug: str
     ) -> Optional[Wing]:
         """Get wing by slug with activities and photos."""
+        # Use selectinload for async compatible eager loading
         result = await session.execute(
             select(Wing)
             .where(Wing.slug == slug)
@@ -48,7 +49,17 @@ class CRUDService:
                 selectinload(Wing.photos)
             )
         )
-        return result.scalar_one_or_none()
+        wing = result.scalar_one_or_none()
+        
+        if not wing:
+            return None
+            
+        # Sort collections in Python since eager loading doesn't support order_by easily
+        # Ensure relationships are loaded (selectinload does this)
+        wing.activities.sort(key=lambda x: x.activity_date, reverse=True)
+        wing.photos.sort(key=lambda x: x.uploaded_at, reverse=True)
+        
+        return wing
     
     # Activity Operations
     
@@ -193,3 +204,28 @@ class CRUDService:
         )
         await session.commit()
         return result.rowcount > 0
+    
+    @staticmethod
+    async def get_all_activities(
+        session: AsyncSession,
+        limit: int = 1000
+    ) -> List[Activity]:
+        """Get all activities across all wings, sorted by date descending."""
+        result = await session.execute(
+            select(Activity)
+            .order_by(Activity.activity_date.desc())
+            .limit(limit)
+        )
+        return result.scalars().all()
+    
+    @staticmethod
+    async def get_all_activities_with_wings(
+        session: AsyncSession
+    ) -> List[tuple[Activity, Wing]]:
+        """Get all activities with their wing information for statistics."""
+        result = await session.execute(
+            select(Activity, Wing)
+            .join(Wing, Activity.wing_id == Wing.id)
+            .order_by(Activity.activity_date.desc())
+        )
+        return result.all()

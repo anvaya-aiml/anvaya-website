@@ -4,6 +4,7 @@ export interface Activity {
   title: string;
   description: string;
   activity_date: string;
+  faculty_coordinator: string | null;
   report_url: string | null;
   report_cloudinary_id: string | null;
   created_at: string;
@@ -14,10 +15,12 @@ export interface ActivityCreate {
   title: string;
   description: string;
   activity_date: string;
+  faculty_coordinator?: string;
 }
 
 export interface ActivityUpdate {
   title?: string;
   description?: string;
   activity_date?: string;
+  faculty_coordinator?: string;
 }

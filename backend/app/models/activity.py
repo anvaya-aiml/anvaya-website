@@ -16,6 +16,7 @@ class Activity(SQLModel, table=True):
     title: str = Field(max_length=200)
     description: str  # Full activity description
     activity_date: date  # Date when activity occurred
+    faculty_coordinator: Optional[str] = Field(default=None, max_length=200)  # Faculty coordinator name
     report_url: Optional[str] = None  # Cloudinary PDF URL
     report_cloudinary_id: Optional[str] = None  # Cloudinary public_id for PDF
     created_at: datetime = Field(default_factory=datetime.utcnow)
