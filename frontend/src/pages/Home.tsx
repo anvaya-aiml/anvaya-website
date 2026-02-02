@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Card from '@/components/ui/Card';
 import { WINGS, getWingRoute } from '@/utils/constants';
+import ActivityStatistics from '@/components/ActivityStatistics';
 import hodphoto from '@/assets/hodphoto.jpg';
 
 const Home: React.FC = () => {
@@ -258,6 +259,9 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Activity Statistics Section */}
+      <ActivityStatistics />
     </div>
   );
 };

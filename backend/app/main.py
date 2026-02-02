@@ -7,17 +7,12 @@ from app.api import public, admin
 
 settings = get_settings()
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Lifespan event handler."""
-    # Startup: Initialize database
     await init_db()
     yield
-    # Shutdown: Clean up (if needed)
 
-
-# Create FastAPI app
 app = FastAPI(
     title="Anvaya Club API",
     description="Backend API for Anvaya Club Display Platform",
@@ -25,7 +20,6 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Configure CORS
 origins = settings.cors_origins.split(",")
 app.add_middleware(
     CORSMiddleware,
@@ -35,26 +29,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# DEBUG: Request Logging Middleware
-from fastapi import Request
-import logging
 
-@app.middleware("http")
-async def log_requests(request: Request, call_next):
-    body = await request.body()
-    try:
-        print(f"DEBUG REQUEST: {request.method} {request.url}")
-        print(f"DEBUG BODY: {body.decode()}")
-    except Exception as e:
-        print(f"DEBUG LOG ERROR: {e}")
-    
-    response = await call_next(request)
-    return response
 
-# Include routers
+
 app.include_router(public.router, prefix="/api", tags=["Public"])
 app.include_router(admin.router, prefix="/api/admin", tags=["Admin"])
-
 
 @app.get("/")
 async def root():
@@ -65,12 +44,10 @@ async def root():
         "version": "1.0.0"
     }
 
-
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
     return {"status": "healthy"}
-
 
 if __name__ == "__main__":
     import uvicorn

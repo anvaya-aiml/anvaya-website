@@ -83,3 +83,63 @@ async def get_activity(
             detail=f"Activity with ID {activity_id} not found"
         )
     return activity
+
+
+@router.get("/activities", response_model=List[ActivityResponse])
+async def get_all_activities(
+    limit: int = 1000,
+    session: AsyncSession = Depends(get_session)
+):
+    """Get all activities across all wings."""
+    activities = await CRUDService.get_all_activities(session, limit=limit)
+    return activities
+
+
+@router.get("/statistics/activities")
+async def get_activity_statistics(
+    year: int = None,
+    session: AsyncSession = Depends(get_session)
+):
+    """Get activity statistics grouped by wing, optionally filtered by year."""
+    from collections import defaultdict
+    from datetime import datetime
+    
+    # Get all activities with wing information
+    activities_with_wings = await CRUDService.get_all_activities_with_wings(session)
+    
+    # Group by wing and count
+    wing_stats = defaultdict(lambda: {"name": "", "slug": "", "count": 0})
+    years_set = set()
+    
+    for activity, wing in activities_with_wings:
+        activity_year = activity.activity_date.year
+        years_set.add(activity_year)
+        
+        # Filter by year if specified
+        if year is not None and activity_year != year:
+            continue
+        
+        wing_stats[wing.id]["name"] = wing.name
+        wing_stats[wing.id]["slug"] = wing.slug
+        wing_stats[wing.id]["count"] += 1
+    
+    # Convert to list and sort by count descending
+    statistics = [
+        {
+            "wing_id": wing_id,
+            "wing_name": data["name"],
+            "wing_slug": data["slug"],
+            "activity_count": data["count"]
+        }
+        for wing_id, data in wing_stats.items()
+    ]
+    statistics.sort(key=lambda x: x["activity_count"], reverse=True)
+    
+    # Get available years sorted descending
+    available_years = sorted(list(years_set), reverse=True)
+    
+    return {
+        "statistics": statistics,
+        "available_years": available_years,
+        "filtered_year": year
+    }

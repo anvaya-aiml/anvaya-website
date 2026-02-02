@@ -8,7 +8,7 @@ settings = get_settings()
 # Create async engine for NeonDB
 engine: AsyncEngine = create_async_engine(
     settings.database_url,
-    echo=True,  # Set to False in production
+    echo=False,  # Set to False in production
     future=True,
 )
 
