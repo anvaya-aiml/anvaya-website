@@ -2,7 +2,7 @@ export const WINGS = [
   {
     name: 'CodeZero',
     slug: 'codezero',
-    description: 'Technical Wing',
+    description: 'Technical Coding Wing',
   },
   {
     name: 'Kalavaibhava',
@@ -20,9 +20,9 @@ export const WINGS = [
     description: 'Research Wing',
   },
   {
-    name: 'Udbhava',
-    slug: 'udbhava',
-    description: 'Innovation Wing',
+    name: 'Uthsaha',
+    slug: 'uthsaha',
+    description: 'Sports Wing',
   },
 ];
 

@@ -65,15 +65,15 @@ const Home: React.FC = () => {
             {[
               {
                 title: 'About',
-                content: 'DSCE is a premier institution dedicated to academic excellence and holistic development of students in engineering and technology, fostering innovation and leadership.'
+                content: 'Dayananda Sagar College of Engineering is a premier technical institution dedicated to delivering quality engineering education with a strong foundation in research, innovation, and societal responsibility. DSCE transforms learners into responsible professionals committed to building a smarter, sustainable, and inclusive future.'
               },
               {
                 title: 'Vision',
-                content: 'To be a center of excellence in technical education, fostering innovation, research, and entrepreneurship among students to create global leaders.'
+                content: 'To impart quality technical education with a focus on Research and Innovation emphasising on Development of Sustainable and Inclusive Technology for the benefit of society.'
               },
               {
                 title: 'Mission',
-                content: 'To provide quality education, develop skilled professionals, and contribute to society through cutting-edge research and community engagement.'
+                content: 'To provide an environment that enhances creativity and Innovation in pursuit of Excellence; nurture teamwork to transform individuals as responsible leaders; and train students to the changing technical scenario.'
               }
             ].map((item, idx) => (
               <motion.div
@@ -109,15 +109,15 @@ const Home: React.FC = () => {
               {[
                 {
                   title: 'About',
-                  content: 'The AI & ML department equips students with cutting-edge skills in artificial intelligence and machine learning, preparing them for the future of technology.'
+                  content: 'The Department of Artificial Intelligence & Machine Learning at DSCE is committed to delivering progressive, future-oriented education that nurtures technical competence, creativity, and ethical responsibility, preparing graduates to contribute meaningfully to a smarter world.'
                 },
                 {
                   title: 'Vision',
-                  content: 'To emerge as a leading department producing competent AI/ML professionals who contribute to technological advancement and societal welfare.'
+                  content: 'To provide progressive education and flourish the student’s ingenuity to be successful professionals impacting the society for a smarter and ethical world.'
                 },
                 {
                   title: 'Mission',
-                  content: 'To impart quality education in AI/ML, foster research culture, and develop industry-ready graduates with strong ethical values and innovative mindset.'
+                  content: 'To adopt an engaging teaching–learning process; promote additional skill development; collaborate with industries; encourage innovation through research; and nurture human values and ethical principles.'
                 }
               ].map((item, idx) => (
                 <motion.div
@@ -152,7 +152,7 @@ const Home: React.FC = () => {
                   </div>
                   <div className="flex-1">
                     <p className="text-primary-700 leading-relaxed italic font-medium">
-                      "Welcome to the Department of AI & ML. We strive to create an environment of academic excellence and innovation, nurturing the next generation of technology leaders."
+                      "At DSCE, we present a stimulating 4-year B.E program in Artificial Intelligence & Machine Learning designed for ambitious students. Our industry-aligned curriculum and project-based learning ensure students are industry-ready for a fulfilling career."
                     </p>
                   </div>
                 </div>
@@ -182,15 +182,15 @@ const Home: React.FC = () => {
             {[
               {
                 title: 'About',
-                content: 'Anvaya Club is the vibrant student community fostering innovation, collaboration, and excellence through diverse activities and events.'
+                content: 'Anvaya is the official student-driven club of the Department of Artificial Intelligence & Machine Learning, committed to fostering innovation, technical excellence, and ethical leadership. The club provides a structured platform for students to strengthen practical skills through hands-on projects, workshops, hackathons, and industry interactions.'
               },
               {
                 title: 'Vision',
-                content: 'To create a dynamic platform for students to explore AI/ML, develop skills, and contribute meaningfully to the tech ecosystem.'
+                content: 'To cultivate a vibrant student-driven ecosystem that nurtures innovation, technical excellence, and ethical leadership in Artificial Intelligence and Machine Learning for societal and industrial impact.'
               },
               {
                 title: 'Mission',
-                content: 'To organize impactful events, workshops, and activities that complement academic learning and foster holistic development.'
+                content: 'To enhance students’ technical competence and practical skills through hands-on learning, projects, and skill-based activities; cultivate innovation and critical thinking; promote collaboration and ethical responsibility; and strengthen industry, academic, and community engagement.'
               }
             ].map((item, idx) => (
               <motion.div
